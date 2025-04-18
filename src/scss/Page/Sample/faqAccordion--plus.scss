@@ -1,0 +1,250 @@
+@use "sass:math";
+@use "../../Setting/" as s;
+
+/*------------------------------------------------------
+ よくある質問
+-------------------------------------------------------*/
+
+// サイズ変数の定義（数値のみ）
+$faq-icon-sp: 25; // スマホ用アイコンサイズ
+$faq-icon-pc: 30; // PC用アイコンサイズ
+$faq-icon-box-pc: 50; // PC用アイコンボックスサイズ
+$faq-answer-indent-pc: 62; // PC用回答インデント
+
+.p-faq {
+  &__inner {
+    margin-top: 4rem;
+    max-width: 750px;
+    @include s.media(md) {
+      //タブレット・pcの時
+      margin-top: 7.5rem;
+    }
+  }
+}
+
+//よくある質問_詳細------------
+.p-faq-qa {
+  $this: &;
+  text-align: left;
+
+  //スマホの時の余白---
+  padding-bottom: #{min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp))};
+
+  margin-top: #{min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp))};
+  margin-bottom: #{min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp))};
+
+  border-bottom: 1px solid #dedede;
+
+  @include s.media(md) {
+    //タブレット・pcの時
+
+    // PCの時の余白---
+    padding-bottom: #{min(#{$faq-icon-pc}px, s.vw(s.$spDesign, $faq-icon-pc))};
+
+    margin-top: #{min(#{$faq-icon-pc}px, s.vw(s.$spDesign, $faq-icon-pc))};
+    margin-bottom: #{min(#{$faq-icon-pc}px, s.vw(s.$spDesign, $faq-icon-pc))};
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &__question {
+    padding-right: calc(1em + 10px);
+    position: relative;
+    cursor: pointer;
+
+    // フォントサイズ, 行送り , 太さ, トラッキング
+    @include s.f_sp-min_around(19, 24, 300, 60);
+
+    @include s.media(md) {
+      //タブレット・pcの時
+      padding-right: calc(4em + 10px);
+      // フォントサイズ
+      font-size: min(21px, s.vw(s.$pcContainer, 21));
+    }
+
+    &-main {
+      position: relative;
+      // 変数を使用 - 単位を外部で指定
+      padding-left: calc(
+        #{min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp))} + 1.2rem
+      );
+      min-height: min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp));
+
+      display: flex;
+      align-items: center;
+
+      @include s.media(md) {
+        //タブレット・pcの時
+        // 変数を使用 - 単位を外部で指定
+        min-height: min(
+          #{$faq-icon-box-pc}px,
+          s.vw(s.$pcContainer, $faq-icon-box-pc)
+        );
+        padding-left: calc(
+          #{min(#{$faq-icon-box-pc}px, s.vw(s.$pcContainer, $faq-icon-box-pc))} +
+            1.2rem
+        );
+      }
+
+      &:before {
+        @extend %en-font;
+        content: "Q";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: fit-content;
+        position: absolute;
+        left: 0;
+        top: -0.05em;
+        color: var(--color-main);
+        opacity: 0.8;
+        // 変数を使用 - 単位を外部で指定
+        font-size: min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp));
+        line-height: 1;
+
+        @include s.media(md) {
+          //タブレット・pcの時
+          // 変数を使用 - 単位を外部で指定
+          width: min(
+            #{$faq-icon-box-pc}px,
+            s.vw(s.$pcContainer, $faq-icon-box-pc)
+          );
+          font-size: min(#{$faq-icon-pc}px, s.vw(s.$pcContainer, $faq-icon-pc));
+        }
+      }
+    }
+
+    &-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      width: 16px;
+      height: 100%;
+
+      // 質問の右側の＋マーク
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        margin: auto;
+        position: absolute;
+        background-color: var(--color-main); // 線の色
+        opacity: 0.8;
+        transition: transform 0.3s ease;
+      }
+
+      // 横線
+      &::before {
+        width: 0.8em;
+        height: 2px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      // 縦線
+      &::after {
+        width: 2px;
+        height: 0.8em;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__answer {
+    position: relative;
+    display: none; //最初は非表示
+    transition: height 300ms ease;
+    overflow: hidden;
+
+    margin-top: 2em;
+
+    // 質問の要素下に余白をつけたい時は、padding-bottomではなく、margin-bottomを使う方が開閉がスムーズになる気がする
+    //   margin-bottom: 1.5em;
+
+    // 変数を使用 - 単位を外部で指定
+    padding-left: calc(
+      #{min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp))} + 1.2rem
+    );
+
+    // padding-right: 2em;
+
+    @include s.media(md) {
+      //タブレット・pcの時
+      margin-top: 1.2em;
+
+      // 質問の要素下に余白をつけたい時は、padding-bottomではなく、margin-bottomを使う方が開閉がスムーズになる気がする
+      margin-bottom: 1em;
+
+      // 変数を使用 - 単位を外部で指定
+      padding-left: calc(
+        #{min(#{$faq-icon-box-pc}px, s.vw(s.$pcContainer, $faq-icon-box-pc))} + 1.2rem
+      );
+    }
+
+    &:before {
+      @extend %en-font;
+      content: "A";
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--color-main);
+      opacity: 0.8;
+      // 変数を使用 - 単位を外部で指定
+      font-size: min(#{$faq-icon-sp}px, s.vw(s.$spDesign, $faq-icon-sp));
+      line-height: 1;
+
+      @include s.media(md) {
+        //タブレット・pcの時
+        // 変数を使用 - 単位を外部で指定
+        width: min(
+          #{$faq-icon-box-pc}px,
+          s.vw(s.$pcContainer, $faq-icon-box-pc)
+        );
+        font-size: min(#{$faq-icon-pc}px, s.vw(s.$pcContainer, $faq-icon-pc));
+      }
+    }
+
+    &-text {
+      // フォントサイズ, 行送り , 太さ, トラッキング
+      @include s.f_sp-min_around(14, 26, false, 50);
+
+      @include s.media(md) {
+        //PCの時
+        font-size: min(18px, s.vw(s.$pcContainer, 18));
+        line-height: s.lh(18, 30); //文字サイズ,行送り(XD)
+      }
+    }
+  }
+
+  //開いているとき------------
+  &.is-active {
+    // 開いた状態（縦線が回転して消える）
+    #{$this}__question-toggle {
+      &::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+        opacity: 0;
+      }
+
+      &::before {
+        transform: translate(-50%, -50%) rotate(180deg);
+      }
+    }
+
+    #{$this}__answer {
+      height: auto;
+      display: block;
+    }
+  }
+}

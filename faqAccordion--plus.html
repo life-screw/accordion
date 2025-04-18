@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="email=no,telephone=no,address=no">
+    <title>【アコーディオン】開閉時に+-アイコンが変化(Vanilla JavaScript)</title>
+    <meta name="description" content="【アコーディオン】開閉時に+-アイコンが変化(Vanilla JavaScript)">
+    <link rel="stylesheet" href="./dist/css/common.css"><!-- ▽▽▽ CSSコードはこちらから▽▽▽ -->
+    <link rel="stylesheet" href="./dist/css/faqAccordion--plus.css"><!-- ▽▽▽ JavaScriptコードはこちらから▽▽▽ -->
+    <script src="./dist/js/faq.js" defer></script>
+  </head>
+  <body>
+    <main class="l-main"><!-- ▼▼▼ コンテンツの記述ここから ▼▼▼ -->
+      <section class="p-faq">
+        <div class="c-title-demo">【アコーディオン】開閉時に+-アイコンが変化<br class="u-only-sp">(Vanilla JavaScript)</div>
+        <div class="c-inner">
+          <p class="c-text-demo">.p-faq-qaに.is-activeクラスを付与すると、アコーディオンが開いた状態になります。</p>
+          <p class="c-text-demo">jQuery不要です。HTMLとCSS、Vanilla JavaScriptだけで実装しています。</p>
+        </div>
+        <div class="p-faq__inner c-inner">
+          <dl class="p-faq-qa js-accordion is-active">
+            <dt class="p-faq-qa__question js-accordion-btn"><span class="p-faq-qa__question-main">制作期間はどのくらいですか？</span><span class="p-faq-qa__question-toggle"></span></dt>
+            <dd class="p-faq-qa__answer js-accordion-contents">
+              <p class="p-faq-qa__answer-text">制作期間は、ホームページの規模やデザインの複雑さによって異なります。1ヶ月〜3ヶ月程度を目安としております。</p>
+            </dd>
+          </dl>
+          <dl class="p-faq-qa js-accordion">
+            <dt class="p-faq-qa__question js-accordion-btn"><span class="p-faq-qa__question-main">SEO対策はしてくれますか？</span><span class="p-faq-qa__question-toggle"></span></dt>
+            <dd class="p-faq-qa__answer js-accordion-contents">
+              <p class="p-faq-qa__answer-text">SEO対策を行っております。弊社ではお客様のターゲットに合わせた適切なキーワード選定でGoogleに評価されやすい構造をめざしています。また、SEO対策の効果を最大限に引き出すために、コンテンツの質や更新頻度も重要です。お客様と一緒に最適な戦略を考えていきます。</p>
+            </dd>
+          </dl>
+          <dl class="p-faq-qa js-accordion">
+            <dt class="p-faq-qa__question js-accordion-btn"><span class="p-faq-qa__question-main">ホームページの運営や更新は自分でできますか？</span><span class="p-faq-qa__question-toggle"></span></dt>
+            <dd class="p-faq-qa__answer js-accordion-contents">
+              <p class="p-faq-qa__answer-text">お客様自身でホームページの更新が可能なCMS（コンテンツマネジメントシステム）を導入できます。オプションで、更新方法のレクチャーも行っておりますので、お気軽にご相談ください。</p>
+            </dd>
+          </dl>
+        </div>
+      </section><!-- ▲▲▲ コンテンツの記述ここまで ▲▲▲ -->
+    </main>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+@use "sass:math";
+@use "../../Setting/" as s;
+
+.p-faq {
+  &__inner {
+    margin-top: 4rem;
+    max-width: 750px;
+    @include s.media(md) {
+      //タブレット・pcの時
+      margin-top: 7.5rem;
+    }
+  }
+}
+
+//よくある質問_詳細------------
+.p-faq-qa {
+  $this: &;
+  text-align: left;
+
+  & + & {
+    margin-top: min(12px, s.vw(s.$spDesign, 12));
+
+    @include s.media(lg) {
+      //PCの時
+      margin-top: min(26px, s.vw(s.$pcContainer, 26));
+    }
+  }
+
+  &__question {
+    background: rgba(var(--color-main-rgb), 0.2);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: calc(1em + 10px);
+    position: relative;
+    cursor: pointer;
+
+    @include s.media(md) {
+      //タブレット・pcの時
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 16px;
+      padding-right: calc(4em + 10px);
+    }
+
+    &-main {
+      position: relative;
+      padding-left: calc(min(25px, s.vw(s.$spDesign, 25)) + 1em);
+      // padding-top: 1em;
+      // padding-bottom: 1em;
+      min-height: min(25px, s.vw(s.$spDesign, 25));
+
+      display: flex;
+      align-items: center;
+      // フォントサイズ, 行送り , 太さ, トラッキング
+      @include s.f_sp-min_around(15, 18, 500, false);
+      color: var(--color-base);
+
+      @include s.media(md) {
+        //タブレット・pcの時
+        min-height: min(50px, s.vw(s.$pcContainer, 50));
+        font-size: min(18px, s.vw(s.$pcContainer, 18));
+        padding-left: calc(min(50px, s.vw(s.$pcContainer, 50)) + 1.2em);
+      }
+
+      &:before {
+        @extend %en-font;
+        content: "Q";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: min(25px, s.vw(s.$spDesign, 25));
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #fff;
+        color: var(--color-main);
+        border-radius: 5px;
+        font-size: min(15px, s.vw(s.$spDesign, 15));
+
+        @include s.media(md) {
+          //タブレット・pcの時
+          width: min(50px, s.vw(s.$pcContainer, 50));
+          font-size: min(30px, s.vw(s.$pcContainer, 30));
+        }
+      }
+    }
+
+    &-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      width: 16px;
+      height: 100%;
+
+      // 質問の右端の矢印
+      &::after {
+        content: "";
+        display: block;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        right: 0.5em;
+        bottom: 0;
+        width: min(6.5px, s.vw(s.$spDesign, 6.5));
+        height: min(6.5px, s.vw(s.$spDesign, 6.5));
+        border-right: 1px solid var(--color-main);
+        border-bottom: 1px solid var(--color-main);
+
+        // transform: translate(-25%, -250%) rotate(45deg);
+        transform: translate(-50%, -50%) rotate(45deg); // 中央に配置
+        transform-origin: left;
+        // transform-origin: left;
+        transition-property: transform;
+        transition-duration: 200ms;
+        transition-timing-function: ease;
+
+        @include s.media(md) {
+          //タブレット・pcの時
+          right: 2em;
+          width: min(12px, s.vw(s.$pcContainer, 12));
+          height: min(12px, s.vw(s.$pcContainer, 12));
+        }
+      }
+    }
+  }
+
+  &__answer {
+    position: relative;
+    display: none; //最初は非表示
+    transition: height 300ms;
+    overflow: hidden;
+    transition: height 300ms ease;
+
+    // border-top: .5px solid #CCCCCC;
+    padding-top: 1em;
+    padding-left: calc(min(25px, s.vw(s.$spDesign, 25)) + 2.5em);
+    padding-right: 2em;
+    padding-bottom: 1.5em;
+
+    @include s.media(md) {
+      //タブレット・pcの時
+      padding-top: 1.5em;
+      padding-left: calc(min(62px, s.vw(s.$pcContainer, 62)) + 2.5em);
+      padding-bottom: 3em;
+    }
+
+    &:before {
+      @extend %en-font;
+      content: "A";
+      display: flex;
+      justify-content: center;
+      width: min(25px, s.vw(s.$spDesign, 25));
+      position: absolute;
+      left: min(10px, s.vw(s.$spDesign, 10));
+      top: 0.6em;
+      color: var(--color-main);
+      font-size: min(15px, s.vw(s.$spDesign, 15));
+
+      @include s.media(md) {
+        //タブレット・pcの時
+        top: 0.4em;
+        left: min(28px, s.vw(s.$pcContainer, 28));
+        font-size: min(30px, s.vw(s.$pcContainer, 30));
+        font-weight: 600;
+      }
+    }
+
+    &-text {
+      // フォントサイズ, 行送り , 太さ, トラッキング
+      @include s.f_sp-min_around(15, 18, false, false);
+
+      @include s.media(md) {
+        //PCの時
+        font-size: min(18px, s.vw(s.$pcContainer, 18));
+        line-height: s.lh(18, 30); //文字サイズ,行送り(XD)
+      }
+    }
+  }
+
+  //開いているとき------------
+  &.is-active {
+    #{$this}__question-toggle {
+      &:after {
+        // transform: translate(-25%, -250%) rotate(-135deg);
+        transform: translate(-50%, -50%) rotate(-135deg); // 中央に配置
+        transform-origin: bottom;
+      }
+    }
+
+    #{$this}__answer {
+      height: auto;
+      display: block;
+    }
+  }
+}
