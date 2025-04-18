@@ -128,5 +128,4 @@ scss > Setting > \_mixin に記載
 ### JavaScript
 
 - src/js/parts にモジュール化（機能ごとにファイルを分けた）JavaScript ファイルを入れています。これを common.js、home.js などのそれぞれのファイルに export で読み込んでコンパイルしています。
-- jQuery は必要なページにのみ functions.php で読み込むページを設定します。
 - head タグ内に JavaScript を読み込んでください。読み込みを遅らせたいときは「defer」を設定してください。
